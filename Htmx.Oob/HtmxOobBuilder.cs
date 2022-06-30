@@ -1,6 +1,5 @@
 ﻿using Htmx.Oob.Items;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace Htmx.Oob;
 

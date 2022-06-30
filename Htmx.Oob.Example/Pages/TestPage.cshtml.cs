@@ -12,15 +12,19 @@ public class TestPage : PageModel
 
     public IActionResult OnGetPartial(string? swap)
     {
-        return Partial("_TestPartial")
-               .WithOob()
-               .AddPartial("_TestPartial", swap ?? "true").Build();
+        return this.OobView(
+            Partial("_TestPartial")
+                .WithOob()
+                .AddPartial("_TestPartial", swap ?? "true")
+        );
     }
 
     public IActionResult OnGetViewComponent(string? swap)
     {
-        return ViewComponent("Test")
-               .WithOob()
-               .AddViewComponent("Test", swap ?? "true").Build();
+        return this.OobView(
+            ViewComponent("Test")
+                .WithOob()
+                .AddViewComponent("Test", swap ?? "true")
+        );
     }
 }

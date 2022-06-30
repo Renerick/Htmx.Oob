@@ -16,12 +16,16 @@
     <h2>Testing partials</h2>
     <form hx-get hx-controller="Test" hx-action="Partial" hx-target="#partial-target">
         <select name="swap">
-            <option value="">none</option>
+            <option value="">default</option>
+            <option value="none">none</option>
+            <option value="delete">delete</option>
             <option value="true">true</option>
             <option value="beforebegin">beforebegin</option>
             <option value="beforeend">beforeend</option>
             <option value="afterbegin">afterbegin</option>
             <option value="afterend">afterend</option>
+            <option value="innerHTML">innerHTML</option>
+            <option value="outerHTML">outerHTML</option>
         </select>
         <button type="submit">Request with oob partial</button>
     </form>

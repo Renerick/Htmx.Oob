@@ -14,9 +14,11 @@ public class TestController : Controller
     [HttpGet("/partial")]
     public IActionResult Partial(string? swap)
     {
-        return PartialView("_TestPartial")
-               .WithOob()
-               .AddPartial("_TestPartial", swap ?? "true").Build();
+        return this.OobView(
+            PartialView("_TestPartial")
+                .WithOob()
+                .AddPartial("_TestPartial", swap ?? "true")
+        );
     }
 
     [HttpGet("/vc")]
