@@ -1,0 +1,101 @@
+﻿@using System.Dynamic
+@using Htmx.Oob.Items
+@using Microsoft.AspNetCore.Html
+@using Microsoft.AspNetCore.Mvc.ModelBinding
+@model Htmx.Oob.HtmxOobBuilder
+@inject IModelMetadataProvider MetadataProvider
+
+@{
+    dynamic ConvertToDynamic(object? obj)
+    {
+        dynamic expando = new ExpandoObject();
+
+        if (obj == null)
+        {
+            return expando;
+        }
+
+        var dictionary = (IDictionary<string, object>)expando;
+        var properties = obj.GetType().GetProperties();
+
+        foreach (var property in properties)
+        {
+            dictionary.Add(property.Name, property.GetValue(obj)!);
+        }
+
+        return expando;
+    }
+
+    Task<IHtmlContent> RenderViewComponentResult(ViewComponentResult vc)
+    {
+        if (vc.ViewComponentName != null)
+        {
+            return Component.InvokeAsync(vc.ViewComponentName, vc.Arguments);
+        }
+        if (vc.ViewComponentType != null)
+        {
+            return Component.InvokeAsync(vc.ViewComponentType, vc.Arguments);
+        }
+
+        throw new InvalidOperationException();
+    }
+
+    Task<IHtmlContent> RenderOobViewComponent(OobViewComponent vc)
+    {
+        if (vc.ViewComponentName != null)
+        {
+            return Component.InvokeAsync(vc.ViewComponentName, vc.Arguments);
+        }
+        if (vc.ViewComponentType != null)
+        {
+            return Component.InvokeAsync(vc.ViewComponentType, vc.Arguments);
+        }
+
+        throw new InvalidOperationException();
+    }
+}
+
+@if (Model.MainResult != null)
+{
+    switch (Model.MainResult)
+    {
+        case PartialViewResult partial:
+            @await Html.PartialAsync(partial.ViewName, partial.Model)
+            break;
+        case ViewComponentResult vc:
+            @(await RenderViewComponentResult(vc))
+            break;
+    }
+}
+
+@foreach (var oob in Model.OobItems)
+{
+    switch (oob)
+    {
+        case OobPartial partial:
+            var viewData = new ViewDataDictionary(MetadataProvider, ViewData.ModelState)
+            {
+                Model = partial.Model,
+                ["Swap"] = partial.Swap
+            };
+            foreach (var (key, value) in ViewData)
+            {
+                viewData[key] = value;
+            }
+            @await Html.PartialAsync(partial.ViewName, viewData)
+            break;
+        case OobViewComponent vc:
+            var arguments = vc.Arguments;
+
+            var expando = ConvertToDynamic(arguments);
+            expando.swap = vc.Swap;
+            vc.Arguments = expando;
+
+            @await RenderOobViewComponent(vc)
+            break;
+        case OobDelete delete:
+            <div hx-swap-oob="@delete.Swap" id="@delete.Id">
+            </div>
+            break;
+    }
+}

@@ -1,0 +1,62 @@
+﻿@model dynamic
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <title>Test controller</title>
+</head>
+<body>
+<div>
+    <h1>Test controller</h1>
+    <h2>Testing partials</h2>
+    <form hx-get hx-controller="Test" hx-action="Partial" hx-target="#partial-target">
+        <select name="swap">
+            <option value="">none</option>
+            <option value="true">true</option>
+            <option value="beforebegin">beforebegin</option>
+            <option value="beforeend">beforeend</option>
+            <option value="afterbegin">afterbegin</option>
+            <option value="afterend">afterend</option>
+        </select>
+        <button type="submit">Request with oob partial</button>
+    </form>
+    <div id="partial-target">
+        Target data will be here
+    </div>
+    <br/>
+    <div id="partial-oob">
+        Partial will be here
+    </div>
+    <br/>
+    <h2>Testing view components</h2>
+    <form hx-get hx-controller="Test" hx-action="ViewComponentAction" hx-target="#vc-target">
+        <select name="swap">
+            <option value="">none</option>
+            <option value="true">true</option>
+            <option value="beforebegin">beforebegin</option>
+            <option value="beforeend">beforeend</option>
+            <option value="afterbegin">afterbegin</option>
+            <option value="afterend">afterend</option>
+        </select>
+        <button type="submit">Request with oob viewcomponent</button>
+    </form>
+    <div id="vc-target">
+        Target data will be here
+    </div>
+    <br/>
+    <div id="vc-oob">
+        Partial will be here
+    </div>
+    <br/>
+    
+    
+    
+    <script src="https://unpkg.com/htmx.org@1.7.0" integrity="sha384-EzBXYPt0/T6gxNp0nuPtLkmRpmDBbjg6WmCUZRLXBBwYYmwAUxzlSGej0ARHX0Bo" crossorigin="anonymous" defer></script>
+</div>
+</body>
+</html>
