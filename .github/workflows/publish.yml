@@ -1,0 +1,31 @@
+name: Publish NuGet package
+
+on:
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set VERSION variable from tag
+        run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 6.0.x
+      - name: Restore dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --no-restore --configuration Release
+      - name: Test
+        run: dotnet test --no-build --configuration Release
+      - name: Pack
+        run: dotnet pack --no-build --configuration Release -o . --include-symbols -p:SymbolPackageFormat=snupkg -p:Version=${{ steps.version.outputs.version }} -p:ContinuousIntegrationBuild=true
+      - name: Publish
+        run: dotnet nuget push *.nupkg --source https://nuget.pkg.github.com/renerick/index.json --api-key ${{GITHUB_TOKEN}}

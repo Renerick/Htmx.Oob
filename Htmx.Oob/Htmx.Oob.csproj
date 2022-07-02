@@ -1,24 +1,30 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+        <Title>Htmx.Oob</Title>
+        <Authors>Denis Palashevskii</Authors>
+        <RepositoryUrl>https://github.com/Renerick/Htmx.Oob</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>htmx</PackageTags>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
-  </ItemGroup>
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Pages" />
-  </ItemGroup>
+    <ItemGroup>
+        <None Include="..\README.md" Pack="true" PackagePath="\"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Views\Shared\OobView.cshtml" />
-  </ItemGroup>
-
-
+    <ItemGroup>
+        <Folder Include="Pages"/>
+    </ItemGroup>
 
 </Project>
