@@ -26,6 +26,6 @@ jobs:
       - name: Test
         run: dotnet test --no-build --configuration Release
       - name: Pack
-        run: dotnet pack --no-build --configuration Release -o . --include-symbols -p:SymbolPackageFormat=snupkg -p:Version=${{ steps.version.outputs.version }} -p:ContinuousIntegrationBuild=true
+        run: dotnet pack --no-build --configuration Release -o . --include-symbols -p:SymbolPackageFormat=snupkg -p:Version=${VERSION} -p:ContinuousIntegrationBuild=true
       - name: Publish
-        run: dotnet nuget push *.nupkg --source https://nuget.pkg.github.com/renerick/index.json --api-key ${{GITHUB_TOKEN}}
+        run: dotnet nuget push *.nupkg --source https://nuget.pkg.github.com/renerick/index.json --api-key ${{ secrets.GITHUB_TOKEN }}
