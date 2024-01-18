@@ -57,4 +57,4 @@ This repo is licensed under the terms of [MIT License](LICENSE)
 
 -----
 
-[htmx](https://github.com/bigskysoftware/htmx) is licensed under the terms of [BSD 2-Clause "Simplified" License](https://github.com/bigskysoftware/htmx/blob/master/LICENSE)
+[htmx](https://github.com/bigskysoftware/htmx) is licensed under the terms of [BSD Zero-Clause License](https://github.com/bigskysoftware/htmx/blob/master/LICENSE)
