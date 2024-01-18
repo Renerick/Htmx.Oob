@@ -32,6 +32,7 @@
         {
             return Component.InvokeAsync(vc.ViewComponentName, vc.Arguments);
         }
+
         if (vc.ViewComponentType != null)
         {
             return Component.InvokeAsync(vc.ViewComponentType, vc.Arguments);
@@ -46,6 +47,7 @@
         {
             return Component.InvokeAsync(vc.ViewComponentName, vc.Arguments);
         }
+
         if (vc.ViewComponentType != null)
         {
             return Component.InvokeAsync(vc.ViewComponentType, vc.Arguments);
@@ -82,7 +84,10 @@
             {
                 viewData[key] = value;
             }
-            @await Html.PartialAsync(partial.ViewName, viewData)
+
+            <template>
+                @await Html.PartialAsync(partial.ViewName, viewData)
+            </template>
             break;
         case OobViewComponent vc:
             var arguments = vc.Arguments;
@@ -91,7 +96,9 @@
             expando.swap = vc.Swap;
             vc.Arguments = expando;
 
-            @await RenderOobViewComponent(vc)
+            <template>
+                @await RenderOobViewComponent(vc)
+            </template>
             break;
         case OobDelete delete:
             <div hx-swap-oob="@delete.Swap" id="@delete.Id">

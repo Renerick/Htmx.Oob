@@ -38,6 +38,17 @@
         Partial will be here
     </div>
     <br/>
+    <table style="border: solid black">
+        <tr>
+            <th>This is a table header and below is a row</th>
+        </tr>
+        <tr id="partial-oob-table-row">
+            <td>Data should be here</td>
+        </tr>
+    </table>
+
+    <hr>
+
     <h2>Testing view components</h2>
     <form hx-get hx-page="TestPage" hx-page-handler="ViewComponent" hx-target="#vc-target">
         <select name="swap">
@@ -58,10 +69,8 @@
         Partial will be here
     </div>
     <br/>
-    
-    
-    
-    <script src="https://unpkg.com/htmx.org@1.7.0" integrity="sha384-EzBXYPt0/T6gxNp0nuPtLkmRpmDBbjg6WmCUZRLXBBwYYmwAUxzlSGej0ARHX0Bo" crossorigin="anonymous" defer></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/bigskysoftware/htmx@4af2f75ae172eb5a29fb89cf8dac22d77c9c0eee/src/htmx.js" crossorigin="anonymous" defer></script>
 </div>
 </body>
 </html>

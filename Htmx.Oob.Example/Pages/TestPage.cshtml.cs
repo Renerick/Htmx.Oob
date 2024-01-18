@@ -16,6 +16,7 @@ public class TestPage : PageModel
             Partial("_TestPartial")
                 .WithOob()
                 .AddPartial("_TestPartial", swap ?? "true")
+                .AddPartial("_TestPartialTableRow", swap ?? "true")
         );
     }
 
