@@ -51,6 +51,10 @@ Refer to [Example](Htmx.Oob.Example) project for more details on how to use it.
 Under the hood, the builder is used as a model of `OobView` partial. When rendered,
 this partial renders all items of the builder as a single page.
 
+## You may also like
+
+- [JalexSocial/Rizzy](https://github.com/JalexSocial/Rizzy) - [Docs on OOB swaps](https://jalexsocial.github.io/rizzy.docs/docs/htmx/out-of-band-swapping/)
+
 ## License
 
 This repo is licensed under the terms of [MIT License](LICENSE)
